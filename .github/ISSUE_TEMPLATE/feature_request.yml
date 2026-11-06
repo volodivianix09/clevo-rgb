@@ -1,0 +1,31 @@
+name: Feature request
+description: Suggest a new mode, setting or compatibility improvement.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the use case, not only the implementation. That makes it
+        much easier to decide whether the feature fits the project.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: input
+    id: laptop
+    attributes:
+      label: Laptop model (optional)
+      placeholder: "Clevo NH79HX-H"
+    validations:
+      required: false

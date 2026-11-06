@@ -1,0 +1,21 @@
+# Build output
+bin/
+obj/
+publish/
+artifacts/
+portable-test/
+release-test/
+
+# Local vendor DLLs (not redistributable)
+lib/*.dll
+
+# IDE / user files
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Local screenshots and logs
+shots/
+*.log
+*.zip

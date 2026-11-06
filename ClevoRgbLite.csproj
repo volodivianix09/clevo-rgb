@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <AssemblyName>ClevoRgbLite</AssemblyName>
+    <RootNamespace>ClevoRgbLite</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Product>Clevo RGB</Product>
+    <Company>Clevo RGB</Company>
+    <Authors>volodivianix09</Authors>
+    <Description>Простое управление подсветкой клавиатуры Clevo</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/volodivianix09/clevo-rgb</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <!--
+    Vendor DLLs are not part of this repository. If a local lib\ folder exists
+    (for example on a machine with Control Center installed), copy it next to
+    the executable. Otherwise the app loads InsydeDCHU.dll directly from
+    C:\Program Files (x86)\ControlCenter\DCHU.
+  -->
+  <ItemGroup Condition="Exists('lib\InsydeDCHU.dll')">
+    <None Include="lib\InsydeDCHU.dll" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
+    <None Include="lib\GetProductdll.dll" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
+    <None Include="lib\msvcp140.dll" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
+    <None Include="lib\vcruntime140.dll" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
+    <None Include="lib\vcruntime140_1.dll" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>
+

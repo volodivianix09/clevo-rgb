@@ -1,0 +1,53 @@
+name: Bug report
+description: Something does not work, or the keyboard behaves unexpectedly.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please include enough detail
+        so the issue can be reproduced.
+
+  - type: input
+    id: laptop
+    attributes:
+      label: Laptop model / barebone
+      placeholder: "THUNDEROBOT 911 Plus, Clevo NH79HX-H"
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2, build 26100"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: App status
+      options:
+        - Подключено
+        - Драйвер не найден
+        - Другое / Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Paste the last lines from %LOCALAPPDATA%\ClevoRGBLite\app.log
+      render: text
+    validations:
+      required: false

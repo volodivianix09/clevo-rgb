@@ -1,0 +1,265 @@
+﻿<Window x:Class="ClevoRgbLite.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Clevo RGB — подсветка клавиатуры"
+        Width="920" Height="840" MinWidth="780" MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextBrush}"
+        FontFamily="Segoe UI"
+        FontSize="13"
+        TextOptions.TextFormattingMode="Display"
+        Closing="Window_Closing"
+        Loaded="Window_Loaded">
+    <Grid Margin="26,22,26,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="Clevo RGB" FontSize="27" FontWeight="SemiBold" />
+                <TextBlock Text="Подсветка клавиатуры" Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Border x:Name="StatusPill" Background="#12251A" BorderBrush="#1E4A2E" BorderThickness="1"
+                        CornerRadius="12" Padding="11,6" Margin="0,0,14,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse x:Name="StatusDot" Width="8" Height="8" Fill="#42D392"
+                                 VerticalAlignment="Center" Margin="0,0,7,0" />
+                        <TextBlock x:Name="StatusText" Text="Подключено" FontSize="12" Foreground="#8BE8B5" />
+                    </StackPanel>
+                </Border>
+                <CheckBox x:Name="EnabledCheck" Content="Подсветка включена"
+                          Style="{StaticResource AppCheckBoxStyle}"
+                          VerticalAlignment="Center"
+                          Checked="Enabled_Changed" Unchecked="Enabled_Changed" />
+            </StackPanel>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                      Padding="0,0,8,0">
+            <StackPanel>
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="Режим" Style="{StaticResource SectionTitleStyle}" />
+                        <TextBlock Text="Выберите, как должна светиться клавиатура."
+                                   Style="{StaticResource MutedTextStyle}" Margin="0,3,0,0" />
+                        <WrapPanel x:Name="ModePanel" Margin="0,14,0,-8">
+                            <RadioButton Tag="Off" GroupName="Mode" Style="{StaticResource ModeRadioStyle}"
+                                         Checked="Mode_Checked">
+                                <StackPanel>
+                                    <TextBlock Text="Выключено" FontWeight="SemiBold" />
+                                    <TextBlock Text="Без подсветки" Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Tag="Static" GroupName="Mode" Style="{StaticResource ModeRadioStyle}"
+                                         Checked="Mode_Checked">
+                                <StackPanel>
+                                    <TextBlock Text="Один цвет" FontWeight="SemiBold" />
+                                    <TextBlock Text="Ровное свечение" Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Tag="Breathing" GroupName="Mode" Style="{StaticResource ModeRadioStyle}"
+                                         Checked="Mode_Checked">
+                                <StackPanel>
+                                    <TextBlock Text="Дыхание" FontWeight="SemiBold" />
+                                    <TextBlock Text="Плавное затухание" Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Tag="Rainbow" GroupName="Mode" Style="{StaticResource ModeRadioStyle}"
+                                         Checked="Mode_Checked">
+                                <StackPanel>
+                                    <TextBlock Text="Радуга" FontWeight="SemiBold" />
+                                    <TextBlock Text="Смена оттенков" Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Tag="Pulse" GroupName="Mode" Style="{StaticResource ModeRadioStyle}"
+                                         Checked="Mode_Checked">
+                                <StackPanel>
+                                    <TextBlock Text="Пульс" FontWeight="SemiBold" />
+                                    <TextBlock Text="Яркая вспышка" Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Tag="Blink" GroupName="Mode" Style="{StaticResource ModeRadioStyle}"
+                                         Checked="Mode_Checked">
+                                <StackPanel>
+                                    <TextBlock Text="Мигание" FontWeight="SemiBold" />
+                                    <TextBlock Text="Резкое вкл/выкл" Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Tag="Sequence" GroupName="Mode" Style="{StaticResource ModeRadioStyle}"
+                                         Checked="Mode_Checked">
+                                <StackPanel>
+                                    <TextBlock Text="Смена цветов" FontWeight="SemiBold" />
+                                    <TextBlock Text="Несколько цветов" Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </RadioButton>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,14">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Цвет" Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock x:Name="ColorHint" Text="Выберите цвет из палитры."
+                                           Style="{StaticResource MutedTextStyle}" Margin="0,3,0,0" />
+                                <WrapPanel x:Name="PalettePanel" Margin="0,12,0,-8" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="22,0,0,0">
+                                <Border x:Name="SelectedColorPreview" Width="66" Height="66" CornerRadius="14"
+                                        Background="#0066FF" BorderBrush="#33FFFFFF" BorderThickness="1" />
+                                <Button Content="Свой цвет…" Style="{StaticResource SecondaryButtonStyle}"
+                                        Margin="0,8,0,0" Click="CustomColor_Click" />
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel x:Name="SequencePanel" Visibility="Collapsed" Margin="0,16,0,0">
+                            <Border Height="1" Background="#252B36" Margin="0,0,0,14" />
+                            <TextBlock Text="Цвета эффекта" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="Нажмите на цвет, затем выберите другой в палитре."
+                                       Style="{StaticResource MutedTextStyle}" Margin="0,3,0,0" />
+                            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                <ListBox x:Name="SequenceList" Background="Transparent" BorderThickness="0"
+                                         Padding="0" SelectionChanged="SequenceList_SelectionChanged"
+                                         ItemContainerStyle="{StaticResource SequenceItemStyle}"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                                <Button Content="+" Style="{StaticResource SecondaryButtonStyle}"
+                                        Width="36" Height="36" Padding="0" FontSize="18"
+                                        Click="AddSequenceColor_Click" />
+                                <Button Content="−" Style="{StaticResource SecondaryButtonStyle}"
+                                        Width="36" Height="36" Padding="0" FontSize="18" Margin="8,0,0,0"
+                                        Click="RemoveSequenceColor_Click" />
+                            </StackPanel>
+
+                            <Grid Margin="0,16,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Время одного цвета" VerticalAlignment="Center" />
+                                <TextBlock x:Name="SequenceHoldValue" Grid.Column="1" Text="2,0 с"
+                                           Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" />
+                            </Grid>
+                            <Slider x:Name="SequenceHoldSlider" Style="{StaticResource AppSliderStyle}"
+                                    Minimum="500" Maximum="10000" TickFrequency="100" Value="2000"
+                                    ValueChanged="SequenceHold_Changed" />
+
+                            <CheckBox x:Name="SequenceBreathingCheck" Content="Дыхание каждого цвета"
+                                      Style="{StaticResource AppCheckBoxStyle}" Margin="0,14,0,0"
+                                      Checked="SequenceBreathing_Changed" Unchecked="SequenceBreathing_Changed" />
+
+                            <StackPanel x:Name="TransitionPanel" Margin="0,14,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Плавность перехода" VerticalAlignment="Center" />
+                                    <TextBlock x:Name="TransitionValue" Grid.Column="1" Text="0,7 с"
+                                               Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Slider x:Name="TransitionSlider" Style="{StaticResource AppSliderStyle}"
+                                        Minimum="0" Maximum="3000" TickFrequency="50" Value="700"
+                                        ValueChanged="Transition_Changed" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="Яркость и скорость" Style="{StaticResource SectionTitleStyle}" />
+                        <Grid Margin="0,14,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Яркость" VerticalAlignment="Center" />
+                            <TextBlock x:Name="BrightnessValue" Grid.Column="1" Text="82%"
+                                       Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" />
+                        </Grid>
+                        <Slider x:Name="BrightnessSlider" Style="{StaticResource AppSliderStyle}"
+                                Minimum="0" Maximum="100" TickFrequency="1" Value="82"
+                                ValueChanged="Brightness_Changed" />
+
+                        <StackPanel x:Name="SpeedPanel" Margin="0,14,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="SpeedLabel" Text="Скорость" VerticalAlignment="Center" />
+                                <TextBlock x:Name="SpeedValue" Grid.Column="1" Text="3,0 с"
+                                           Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" />
+                            </Grid>
+                            <Slider x:Name="SpeedSlider" Style="{StaticResource AppSliderStyle}"
+                                    Minimum="500" Maximum="10000" TickFrequency="100" Value="3000"
+                                    ValueChanged="Speed_Changed" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="ModeHint" Text="Подсветка обновляется сразу после изменения."
+                                   Style="{StaticResource MutedTextStyle}" Margin="0,14,0,0" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Предпросмотр" Style="{StaticResource SectionTitleStyle}" />
+                        <TextBlock Text="Так будет выглядеть подсветка клавиатуры."
+                                   Style="{StaticResource MutedTextStyle}" Margin="0,3,0,0" />
+                        <Border Height="96" CornerRadius="12" Background="#090B0F" BorderBrush="#252B36"
+                                BorderThickness="1" Margin="0,14,0,0">
+                            <Grid>
+                                <Border x:Name="PreviewGlow" Margin="20" CornerRadius="10"
+                                        Background="#0066FF">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="#0066FF" BlurRadius="34" ShadowDepth="0"
+                                                          Opacity="0.85" />
+                                    </Border.Effect>
+                                </Border>
+                                <TextBlock x:Name="PreviewModeText" Text="Смена цветов"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           FontSize="15" FontWeight="SemiBold" Foreground="#CCFFFFFF" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid Grid.Row="2" Margin="0,16,0,0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <CheckBox x:Name="AutostartCheck" Content="Запускать с Windows"
+                          Style="{StaticResource AppCheckBoxStyle}"
+                          Checked="Autostart_Changed" Unchecked="Autostart_Changed" />
+                <TextBlock x:Name="SaveStatus" Text="Изменения применяются и сохраняются автоматически."
+                           Style="{StaticResource MutedTextStyle}" Margin="18,0,0,0" VerticalAlignment="Center" />
+            </StackPanel>
+            <Button Content="Скрыть в трей" Style="{StaticResource SecondaryButtonStyle}"
+                    HorizontalAlignment="Right" Click="Hide_Click" />
+        </Grid>
+    </Grid>
+</Window>
